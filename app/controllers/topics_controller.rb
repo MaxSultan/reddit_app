@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   before_action :set_sub
-  before_action :set_topic, only [:show, :edit, :destroy, :update]
+  before_action :set_topic, only: [:show, :edit, :destroy, :update]
 
   def index
     @topics = @sub.topics
@@ -11,12 +11,12 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    render partial 'form'
+    render partial: "form"
   end
 
   def new
     @topic = @sub.topics.new
-    render partial 'form'
+    render partial: "form"
   end
 
   def create
@@ -34,10 +34,12 @@ class TopicsController < ApplicationController
       redirect_to [@sub, @topic]
     else
       render :edit
+    end
   end 
 
   def destroy
     @topic.destroy
+    redirect_to sub_topics_path(@sub)
   end 
 
   private
